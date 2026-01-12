@@ -16,19 +16,16 @@ void setup() {
 
 void loop() {
   // Read the Pins
-    int a = !digitalRead(13); // The NOT Gate was included due to INTPUT_PULLUP making it so that a Press = 0, and a Release = 1
-    int b = !digitalRead(12); // It reads it automatically as one to prevent random static and electrical noise, so a NOT gate fixes it
-    int c = !digitalRead(11);
+    int a = digitalRead(13); // The NOT Gate was included due to INTPUT_PULLUP making it so that a Press = 0, and a Release = 1
+    int b = digitalRead(12); // It reads it automatically as one to prevent random static and electrical noise, so a NOT gate fixes it
+    int c = digitalRead(11);
 
   // Logical Function
-    int buttonVote =( 2 <= (a + b + c));
+    bool buttonVote = (a + b + c) <= 1;
   
   // Turning on LED if vote passes
-    if (buttonVote == HIGH) {
-      digitalWrite(ledPin, HIGH);
-  } else {
-      digitalWrite(ledPin, LOW);
-  }
+  digitalWrite(ledPin, buttonVote);
+
   delay(100); //Increased for less "jumpy-ness"
 }
 //January 11th, 2026
